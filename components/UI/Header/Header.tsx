@@ -6,22 +6,44 @@ import {
   LIGHT_COLOR_TEXT,
   DARK_COLOR_TEXT,
 } from '../../../constants/Colors';
+import {useAppDispatch, useAppSelector} from '../../../redux/redux-hooks';
+import {uiActions} from '../../../redux/ui-reducer';
 import {HeaderStyles} from './HeaderStyles';
 import {HeaderTypes} from './HeaderTypes';
 
 const Header = (props: HeaderTypes) => {
   const {title} = props;
+  const isLightModeActive = useAppSelector(state => state.ui.isLightModeActive);
+  const dispatch = useAppDispatch();
+
+  const onChangeModeHandler = () => {
+    dispatch(uiActions.toggleMode());
+  };
+
   return (
     <View
       style={[
         HeaderStyles.headerContainer,
-        {backgroundColor: MAIN_LIGHT_COLOR},
+        {
+          backgroundColor: isLightModeActive
+            ? MAIN_LIGHT_COLOR
+            : MAIN_DARK_COLOR,
+        },
       ]}>
-      <Text style={[HeaderStyles.headerText, {color: LIGHT_COLOR_TEXT}]}>
+      <Text
+        style={[
+          HeaderStyles.headerText,
+          {
+            color: isLightModeActive ? LIGHT_COLOR_TEXT : DARK_COLOR_TEXT,
+          },
+        ]}>
         {title || 'Hola, Bienvenide'}
       </Text>
       <View style={HeaderStyles.btnMode}>
-        <Button title={'Light'} />
+        <Button
+          onPress={onChangeModeHandler}
+          title={isLightModeActive ? 'Dark mode' : 'Light mode'}
+        />
       </View>
     </View>
   );
