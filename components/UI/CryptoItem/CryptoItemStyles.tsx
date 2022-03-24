@@ -2,10 +2,12 @@ import {StyleSheet} from 'react-native';
 
 export const CryptoItemStyles = StyleSheet.create({
   mainContainer: {
-    padding: 15,
+    paddingVertical: '7%',
+    paddingHorizontal: 50,
     alignItems: 'center',
     flexDirection: 'row',
-    justifyContent: 'space-evenly',
+    justifyContent: 'space-between',
+    backgroundColor: 'transparent',
   },
   itemText: {
     fontSize: 16,

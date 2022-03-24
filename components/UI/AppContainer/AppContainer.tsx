@@ -1,11 +1,12 @@
 import React, {useEffect} from 'react';
-import {FlatList, SafeAreaView} from 'react-native';
+import {FlatList, SafeAreaView, View} from 'react-native';
 import {MAIN_DARK_COLOR, MAIN_LIGHT_COLOR} from '../../../constants/Colors';
 import {cryptoManager} from '../../../redux/crypto-actions';
-import {cryptoActions} from '../../../redux/crypto-reducer';
 import {useAppDispatch, useAppSelector} from '../../../redux/redux-hooks';
 import CryptoItem from '../CryptoItem';
+import {CryptoItemList} from '../CryptoItem/CryptoItem';
 import Header from '../Header';
+import ListHeader from '../ListHeader';
 import {AppContainerStyles} from './AppContainerStyle';
 
 const AppContainer = () => {
@@ -34,13 +35,20 @@ const AppContainer = () => {
       <Header title={'CoinCap Market'} />
       {console.log(cryptoArray)}
       <FlatList
+        contentContainerStyle={AppContainerStyles.flatlistContainer}
         data={cryptoArray}
+        ListHeaderComponent={() => (
+          <ListHeader titleColLeft={'Nombre'} titleColRight={'Precio (USD)'} />
+        )}
         renderItem={({item}) => (
-          <CryptoItem
+          <CryptoItemList
             name={item.name}
             price={item.price}
             interactionType={item.interactionType}
           />
+        )}
+        ItemSeparatorComponent={() => (
+          <View style={AppContainerStyles.separator} />
         )}
       />
     </SafeAreaView>
