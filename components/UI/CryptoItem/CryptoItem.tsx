@@ -1,10 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import {Text, View, Animated} from 'react-native';
+import {Text, View} from 'react-native';
 import {
-  MAIN_LIGHT_COLOR,
   LIGHT_COLOR_TEXT,
   DARK_COLOR_TEXT,
-  MAIN_DARK_COLOR,
   INCREMENT_COLOR_TEXT,
   DECREMENT_COLOR_TEXT,
 } from '../../../constants/Colors';
@@ -50,7 +48,7 @@ const CryptoItem = ({name, price, style, interactionType}: CryptoItemTypes) => {
           CryptoItemStyles.itemText,
           {color: isLightModeActive ? LIGHT_COLOR_TEXT : DARK_COLOR_TEXT},
         ]}>
-        ${price}
+        {price <= 0 ? 'Cargando...' : '$' + price.toFixed(3)}
       </Text>
     </View>
   );

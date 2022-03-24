@@ -3,7 +3,6 @@ import {FlatList, SafeAreaView, View} from 'react-native';
 import {MAIN_DARK_COLOR, MAIN_LIGHT_COLOR} from '../../../constants/Colors';
 import {cryptoManager} from '../../../redux/crypto-actions';
 import {useAppDispatch, useAppSelector} from '../../../redux/redux-hooks';
-import CryptoItem from '../CryptoItem';
 import {CryptoItemList} from '../CryptoItem/CryptoItem';
 import Header from '../Header';
 import ListHeader from '../ListHeader';
@@ -13,14 +12,15 @@ const AppContainer = () => {
   const isLightModeActive = useAppSelector(state => state.ui.isLightModeActive);
   const cryptoArray = useAppSelector(state => state.crypto.cryptoArray);
   const dispatch = useAppDispatch();
-  const pricesWs = new WebSocket(
-    'wss://ws.coincap.io/prices?assets=bitcoin,ethereum,monero,litecoin',
-  );
+
   useEffect(() => {
+    const pricesWs = new WebSocket(
+      'wss://ws.coincap.io/prices?assets=bitcoin,ethereum,monero,litecoin,xrp,cardano,solana',
+    );
     pricesWs.onmessage = function (msg) {
       dispatch(cryptoManager(msg.data));
     };
-  }, []);
+  }, [dispatch]);
 
   return (
     <SafeAreaView
@@ -33,7 +33,6 @@ const AppContainer = () => {
         },
       ]}>
       <Header title={'CoinCap Market'} />
-      {console.log(cryptoArray)}
       <FlatList
         contentContainerStyle={AppContainerStyles.flatlistContainer}
         data={cryptoArray}

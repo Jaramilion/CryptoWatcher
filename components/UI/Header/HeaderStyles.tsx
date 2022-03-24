@@ -18,4 +18,15 @@ export const HeaderStyles = StyleSheet.create({
     top: 10,
     right: 5,
   },
+  updateText: {
+    fontStyle: 'italic',
+    fontSize: 11,
+    marginTop: 4,
+  },
+  icon: {
+    height: 40,
+    width: 40,
+    paddingRight: 0,
+    paddingLeft: 10,
+  },
 });

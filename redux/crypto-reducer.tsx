@@ -1,6 +1,8 @@
-import {createSlice} from '@reduxjs/toolkit';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {CryptoItemTypes} from '../components/UI/CryptoItem/CryptoItemTypes';
+import {InitialStateTypes} from './cryptoReducerTypes/CryptoReducerTypes';
 
-const initialState = {
+const initialState: InitialStateTypes = {
   cryptoArray: [
     {
       name: 'bitcoin',
@@ -23,22 +25,20 @@ const initialState = {
       interactionType: 'initial',
     },
   ],
+  latestUpdate: '',
 };
 
 const cryptoReducer = createSlice({
   name: 'cryptoValues',
   initialState,
   reducers: {
-    updateArray(state, action) {
+    updateArray(state, action: PayloadAction<CryptoItemTypes>) {
+      state.latestUpdate = new Date().toLocaleTimeString('en-US');
       const cryptoFound = state.cryptoArray.find(
         crypto => crypto.name === action.payload.name,
       );
       if (!cryptoFound) {
-        state.cryptoArray.push({
-          name: action.payload.name,
-          price: action.payload.price,
-          interactionType: 'initial',
-        });
+        state.cryptoArray.push(action.payload);
         return;
       }
       if (action.payload.price > cryptoFound.price) {
