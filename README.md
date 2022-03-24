@@ -33,3 +33,5 @@ iOS
   - navegar a la carpeta ios desde la carpeta raiz y ejecutar pod install
   - en una terminal ejecutar npx react-native start
   - en otra npx react-native run-android
+  
+Para ejecutar en android studio es necesario tener la version mas actualizado
