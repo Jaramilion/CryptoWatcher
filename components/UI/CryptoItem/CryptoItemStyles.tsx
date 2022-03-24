@@ -9,5 +9,7 @@ export const CryptoItemStyles = StyleSheet.create({
   },
   itemText: {
     fontSize: 16,
+    textTransform: 'capitalize',
+    textAlign: 'justify',
   },
 });

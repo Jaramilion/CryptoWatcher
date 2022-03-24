@@ -35,7 +35,7 @@ const CryptoItem = (props: CryptoItemTypes) => {
           CryptoItemStyles.itemText,
           {color: isLightModeActive ? LIGHT_COLOR_TEXT : DARK_COLOR_TEXT},
         ]}>
-        ${price.toFixed(2)}
+        ${price}
       </Text>
     </View>
   );

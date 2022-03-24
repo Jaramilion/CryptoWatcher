@@ -1,10 +1,12 @@
 import {configureStore} from '@reduxjs/toolkit';
+import cryptoReducer from './crypto-reducer';
 import uiReducer from './ui-reducer';
 // ...
 
 export const store = configureStore({
   reducer: {
     ui: uiReducer,
+    crypto: cryptoReducer,
   },
 });
 
