@@ -23,7 +23,7 @@ Añadi un par de iconos para indicar al usuario el cambio de modo de vision (Osc
 Tambien se incluye un alert para cuando el websocket falla.
 
 
-***__----UPDATE 25/03/2022----__***
+**__----UPDATE 25/03/2022----__**
 
 - Redux persist, asyncstorage agregado a la lista de dependencias, se agrego para no tener que esperar los updates cada que abres la app y guardar las preferencias.
 - Ahora la lista se actualiza con la app abierta solamente
