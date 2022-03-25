@@ -23,26 +23,41 @@ Añadi un par de iconos para indicar al usuario el cambio de modo de vision (Osc
 Tambien se incluye un alert para cuando el websocket falla.
 
 
-----UPDATE 25/03/2022------
+***__----UPDATE 25/03/2022----__***
 -Redux persist, asyncstorage agregado a la lista de dependencias, se agrego para no tener que esperar los updates cada que abres la app y guardar las preferencias.
 -Ahora la lista se actualiza con la app abierta solamente
 -Si el websocket falla aparece feedback al usuario
 
 
-Requerimientos para correr este proyecto
+**Requerimientos para correr este proyecto**
 - node.js v16+
 - cocoapods
 
-Pasos a seguir para ejecutar
+**Pasos a seguir para ejecutar**
 
 - Ejecutar npm install en la carpeta raiz del proyecto
+```
+  npm install
+```
 
 Android
-  -npx react-native run-android
+```
+    npx react-native run-android
+```
   
-iOS
+  
+***iOS (Importante)***
   - navegar a la carpeta ios desde la carpeta raiz y ejecutar pod install
+    ```
+    pod install
+    ```
   - en una terminal ejecutar npx react-native start
-  - en otra npx react-native run-android
+    ```
+    npx react-native start
+    ```
+  - en otra npx react-native run-ios
+  ```
+    npx react-native run-ios
+    ```
   
-Para ejecutar en android studio es necesario tener la version mas actualizado
+***Para ejecutar en android studio es necesario tener la version mas actualizada***
