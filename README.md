@@ -24,9 +24,10 @@ Tambien se incluye un alert para cuando el websocket falla.
 
 
 ***__----UPDATE 25/03/2022----__***
--Redux persist, asyncstorage agregado a la lista de dependencias, se agrego para no tener que esperar los updates cada que abres la app y guardar las preferencias.
--Ahora la lista se actualiza con la app abierta solamente
--Si el websocket falla aparece feedback al usuario
+
+- Redux persist, asyncstorage agregado a la lista de dependencias, se agrego para no tener que esperar los updates cada que abres la app y guardar las preferencias.
+- Ahora la lista se actualiza con la app abierta solamente
+- Si el websocket falla aparece feedback al usuario
 
 
 **Requerimientos para correr este proyecto**
@@ -46,7 +47,7 @@ Android
 ```
   
   
-***iOS (Importante)***
+***IOS (Importante)***
   - navegar a la carpeta ios desde la carpeta raiz y ejecutar pod install
     ```
     pod install
