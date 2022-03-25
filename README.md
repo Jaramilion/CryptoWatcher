@@ -57,8 +57,9 @@ Android
     npx react-native start
     ```
   - en otra npx react-native run-ios
-  ```
+    ```
     npx react-native run-ios
     ```
+  
   
 ***Para ejecutar en android studio es necesario tener la version mas actualizada***
