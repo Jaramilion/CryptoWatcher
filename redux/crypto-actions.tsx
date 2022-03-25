@@ -5,6 +5,12 @@ import {uiActions} from './ui-reducer';
 
 export const fetchCryptos = () => {
   return async (dispatchEvent: AppDispatch) => {
+    let delayUpdate = true;
+    let savedDataBetweenIntervals = [];
+    window.setInterval(() => {
+      delayUpdate = !delayUpdate;
+    }, 3000);
+
     const connectWs = () => {
       const pricesWs = new WebSocket(
         'wss://ws.coincap.io/prices?assets=bitcoin,ethereum,monero,litecoin,xrp',
@@ -13,17 +19,46 @@ export const fetchCryptos = () => {
         if (AppState.currentState !== 'active') {
           pricesWs.close();
         }
-        const parsedObj = JSON.parse(msg.data);
-        const propNames = Object.keys(parsedObj);
-        propNames.forEach(cryptoName => {
-          dispatchEvent(
-            cryptoActions.updateArray({
-              name: cryptoName,
-              price: parseFloat(parsedObj[cryptoName]),
-              interactionType: 'initial',
-            }),
+
+        if (delayUpdate) {
+          const parsedObj = JSON.parse(msg.data);
+          let savedCryptoObj = {};
+          savedDataBetweenIntervals.push(parsedObj);
+          savedDataBetweenIntervals.forEach(val => {
+            const savedPropKeys = Object.keys(savedCryptoObj);
+            const propNames = Object.keys(val);
+
+            if (savedPropKeys.length < 1) {
+              savedCryptoObj = {...val};
+            }
+            propNames.forEach(key => {
+              if (savedCryptoObj[key]) {
+                savedCryptoObj[key] = val[key];
+              } else {
+                const newVal = {
+                  [key]: val[key],
+                };
+                savedCryptoObj = {...savedCryptoObj, ...newVal};
+              }
+            });
+          });
+          savedDataBetweenIntervals = [];
+          const propNames = Object.keys(
+            savedDataBetweenIntervals.length < 1 ? parsedObj : savedCryptoObj,
           );
-        });
+          propNames.forEach(cryptoName => {
+            dispatchEvent(
+              cryptoActions.updateArray({
+                name: cryptoName,
+                price: parseFloat(parsedObj[cryptoName]),
+                interactionType: 'initial',
+              }),
+            );
+          });
+        } else {
+          const parsedObj = JSON.parse(msg.data);
+          savedDataBetweenIntervals.push(parsedObj);
+        }
       };
       pricesWs.onclose = ev => {
         console.log('ONCLOSE' + ev);
