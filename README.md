@@ -10,13 +10,24 @@ archivos de redux, la store, reducers, actions y los types, configure la tienda 
 
 El primer reducer que agregue fue el del UI, donde simplemente manejo isLightModeActive con un reducer para togglear para handlear los onPress en el boton.
 
-Posteriormente, usando la composicion soportada por redux toolkit agregue el segundo reducer, cryptoReducer. Esto para fetchear la info del websocket (WS) (OJO los valores se van inicializando cuando el WS envia un cambio en la crypto) y tenerla disponible en la store de redux.
-Utilice un action para iterar sobre el array de actualizaciones que iba llegando del WS, y de esta manera llamar a mi reducer para ir actualizando cada valor en la store, al actualizar el valor verifica si es mayor o menor y agrega el interactionType.
+Posteriormente, usando la composicion soportada por redux toolkit agregue el segundo reducer, cryptoReducer. Esto para fetchear la info del websocket (WS) y tenerla disponible en la store de redux.
+Se movio el WS al crypto-actions para manejar los mensajes de error, ahora con cada respuesta del WS en el mismo action se itera la respuesta del WS y se llama al reduce de las crypto para ir actualizando cada valor en la store, al actualizar el valor verifica si es mayor o menor y agrega el interactionType.
+
+Agregue redux-persist/asyncstorage para ir guardando las crypto fetcheadas y no esperar cada que se abre la app, lo mismo con las preferencias
 
 Despues agregue las interacciones con el precio de las cryptos, cada que baja o sube el precio en relacion al anterior CryptoItem recibe en su useEffect la dependencia del precio y interactionType, para
 triggerear el cambio del backgroundColor en la instancia del componente.
 
-Finalmente añadi un par de iconos para indicar al usuario el cambio de modo de vision (Oscuro o Claro) y fui agregando los types que me hicieron falta.
+Añadi un par de iconos para indicar al usuario el cambio de modo de vision (Oscuro o Claro) y fui agregando los types que me hicieron falta.
+
+Tambien se incluye un alert para cuando el websocket falla.
+
+
+----UPDATE 25/03/2022------
+-Redux persist, asyncstorage agregado a la lista de dependencias, se agrego para no tener que esperar los updates cada que abres la app y guardar las preferencias.
+-Ahora la lista se actualiza con la app abierta solamente
+-Si el websocket falla aparece feedback al usuario
+
 
 Requerimientos para correr este proyecto
 - node.js v16+
