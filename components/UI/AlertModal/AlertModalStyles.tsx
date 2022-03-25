@@ -7,7 +7,7 @@ export const AlertModalStyles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   viewContainer: {
-    height: '30%',
+    height: 'auto',
     backgroundColor: '#fff',
     alignItems: 'center',
     marginTop: 'auto',
@@ -30,5 +30,6 @@ export const AlertModalStyles = StyleSheet.create({
     textAlign: 'center',
     color: '#000',
     fontSize: 14,
+    paddingVertical: '5%',
   },
 });
