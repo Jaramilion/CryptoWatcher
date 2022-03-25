@@ -7,20 +7,22 @@ export const fetchCryptos = () => {
   return async (dispatchEvent: AppDispatch) => {
     const connectWs = () => {
       const pricesWs = new WebSocket(
-        'wss://ws.coincap.io/prices?assets=bitcoin,ethereum,monero,litecoin,xrp,cardano,solana',
+        'wss://ws.coincap.io/prices?assets=bitcoin,ethereum,monero,litecoin,xrp',
       );
       pricesWs.onmessage = msg => {
+        if (AppState.currentState !== 'active') {
+          pricesWs.close();
+        }
         const parsedObj = JSON.parse(msg.data);
         const propNames = Object.keys(parsedObj);
         propNames.forEach(cryptoName => {
-          AppState.currentState === 'active' &&
-            dispatchEvent(
-              cryptoActions.updateArray({
-                name: cryptoName,
-                price: parseFloat(parsedObj[cryptoName]),
-                interactionType: 'initial',
-              }),
-            );
+          dispatchEvent(
+            cryptoActions.updateArray({
+              name: cryptoName,
+              price: parseFloat(parsedObj[cryptoName]),
+              interactionType: 'initial',
+            }),
+          );
         });
       };
       pricesWs.onclose = ev => {

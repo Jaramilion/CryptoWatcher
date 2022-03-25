@@ -28,5 +28,7 @@ export const AlertModalStyles = StyleSheet.create({
   },
   text: {
     textAlign: 'center',
+    color: '#000',
+    fontSize: 14,
   },
 });

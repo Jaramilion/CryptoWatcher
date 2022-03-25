@@ -10,6 +10,11 @@ const ListHeader = ({titleColLeft, titleColRight}: ListHeaderTypes) => {
   const isLightModeActive = useAppSelector(state => state.ui.isLightModeActive);
   return (
     <>
+      <Text style={ListHeaderStyles.tableDescription}>
+        Listado de cripto monedas
+      </Text>
+      <View style={AppContainerStyles.separator} />
+
       <View style={ListHeaderStyles.listHeaderContainer}>
         <Text
           style={[

@@ -1,5 +1,11 @@
 import React, {useEffect, useRef} from 'react';
-import {FlatList, SafeAreaView, View, AppState} from 'react-native';
+import {
+  FlatList,
+  SafeAreaView,
+  View,
+  AppState,
+  ActivityIndicator,
+} from 'react-native';
 import {MAIN_DARK_COLOR, MAIN_LIGHT_COLOR} from '../../../constants/Colors';
 import {fetchCryptos} from '../../../redux/crypto-actions';
 import {useAppDispatch, useAppSelector} from '../../../redux/redux-hooks';
@@ -21,6 +27,12 @@ const AppContainer = () => {
   useEffect(() => {
     dispatch(fetchCryptos());
     const subscription = AppState.addEventListener('change', nextAppState => {
+      if (
+        appState.current.match(/inactive|background/) &&
+        nextAppState === 'active'
+      ) {
+        dispatch(fetchCryptos());
+      }
       appState.current = nextAppState;
     });
     return () => {
@@ -68,6 +80,7 @@ const AppContainer = () => {
         ItemSeparatorComponent={() => (
           <View style={AppContainerStyles.separator} />
         )}
+        ListEmptyComponent={() => <ActivityIndicator size="small" />}
       />
     </SafeAreaView>
   );

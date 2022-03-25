@@ -12,4 +12,9 @@ export const ListHeaderStyles = StyleSheet.create({
   listHeaderTitleText: {
     fontWeight: 'bold',
   },
+  tableDescription: {
+    fontSize: 16,
+    alignSelf: 'center',
+    paddingVertical: '2%',
+  },
 });

@@ -22,7 +22,7 @@ const CryptoItem = ({name, price, style, interactionType}: CryptoItemTypes) => {
     }
     const delayBackgroundTimer = setTimeout(() => {
       setBackgroundColor('transparent');
-    }, 300);
+    }, 200);
 
     return () => clearTimeout(delayBackgroundTimer);
   }, [price, interactionType]);
@@ -48,7 +48,7 @@ const CryptoItem = ({name, price, style, interactionType}: CryptoItemTypes) => {
           CryptoItemStyles.itemText,
           {color: isLightModeActive ? LIGHT_COLOR_TEXT : DARK_COLOR_TEXT},
         ]}>
-        {price <= 0 ? 'Cargando...' : '$' + price.toFixed(3)}
+        {price <= 0 ? 'Cargando...' : '$' + price.toFixed(4)}
       </Text>
     </View>
   );
