@@ -2,7 +2,7 @@ import {StyleSheet} from 'react-native';
 
 export const HeaderStyles = StyleSheet.create({
   headerContainer: {
-    height: 60,
+    height: 70,
     width: '100%',
     borderBottomColor: '#DEDDDD',
     borderBottomWidth: 1,
@@ -15,7 +15,7 @@ export const HeaderStyles = StyleSheet.create({
   },
   btnMode: {
     position: 'absolute',
-    top: 10,
+    top: 15,
     right: 5,
   },
   updateText: {

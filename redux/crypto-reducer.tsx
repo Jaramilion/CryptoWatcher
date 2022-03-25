@@ -32,7 +32,10 @@ const cryptoReducer = createSlice({
   name: 'cryptoValues',
   initialState,
   reducers: {
-    updateArray(state, action: PayloadAction<CryptoItemTypes>) {
+    updateArray(
+      state: InitialStateTypes,
+      action: PayloadAction<CryptoItemTypes>,
+    ) {
       state.latestUpdate = new Date().toLocaleTimeString('en-US');
       const cryptoFound = state.cryptoArray.find(
         crypto => crypto.name === action.payload.name,
